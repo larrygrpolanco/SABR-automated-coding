@@ -66,7 +66,7 @@ class ChatGPTCoder:
                     {"role": "system", "content": system_prompt},
                     {"role": "user", "content": utterance},
                 ],
-                max_tokens=60,  # Increased max_tokens to accommodate the explanation
+                max_tokens=100,  # Increased max_tokens to accommodate the explanation
             )
 
             # Extract the response, which includes both the code and the explanation
