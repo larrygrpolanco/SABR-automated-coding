@@ -1,75 +1,51 @@
 import streamlit as st
 import pandas as pd
-import openai
+from chatgpt_coder import ChatGPTCoder
 
+# Initialize the ChatGPTCoder with your OpenAI API key
+gpt_coder = ChatGPTCoder(st.secrets["OPENAI_API_KEY"])
 
-
-class ChatGPTProcessor:
-    def __init__(self, openai_api_key):
-        self.client = openai.OpenAI(api_key=openai_api_key)
-        openai.api_key = openai_api_key
-
-    def generate_code(
-        self,
-        utterance,
-        code_name,
-        code_definition,
-    ):
-        """
-Generate code x or 1, input your utterance and then the code definition
-        """
-
-        try:
-            response = openai.chat.completions.create(
-                model="gpt-3.5-turbo",
-                messages=[
-                    {"role": "system", "content": f"You are a qualitiave resaerch assistant coding utterances for {code_name}. Code definition/instructions: {code_definition}. The user input will be just the utterance. Respond with a 1 if the response meets the definition criteria, respond with an x if it does not."},
-                    {"role": "user", "content": utterance},
-                    max_tokens=60,
-                ],
-            )
-            return response.choices[0].message.content
-        
-        except Exception as e:
-            print(f"Error in generating code: {e}")
-            return 'Error'  # Consider handling errors appropriately.
-
-
-class FormAutoCoder(ChatGPTProcessor):
-    def __init__(self, openai_api_key):
-        super().__init__(openai_api_key=openai_api_key)
-        
-
-    def code_comment(self, utterance):
-        # Example criterion: does the utterance contain a comment keyword?
-        code_name = "comment"
-        code_definition = """
-        * These are the most common utterance
-        form.
-        * Declarative sentences that convey
-        information or make statements.
-        * They do not demand a response from
-        the listener.
-        * Comments end in a period or exclamation
-        mark.
-        * If an utterance does not neatly fit one of these
-        utterance forms, assume it is a comment by
-        default.
-        """
-        code_response = self.generate_code(utterance, code_name, code_definition)
-
-        return code_response
-
-form_auto_coder = FormAutoCoder(openai_api_key=st.secrets(["OPENAI_API_KEY"]))
-
-
-
+# File uploader widget
 uploaded_file = st.file_uploader("Choose a file")
 if uploaded_file is not None:
+    # Load the uploaded file into a DataFrame
     df = pd.read_excel(uploaded_file)
-    # Example of processing each row (simplified and needs to be adapted)
 
-    st.dataframe(df)  # Corrected method to display DataFrame
+    # Convert every column into a string for consistent processing
+    for column in df.columns:
+        df[column] = df[column].astype(str)
 
-    # for index, row in df.iterrows():
-    #     df.at[index, 'Comment Code'] = auto_coder.code_comment(row['Utterance'])
+    # Display the DataFrame for the user to review
+    st.dataframe(df)
+
+    # Options for user to select codes to apply
+    code_options = ["Cognition", "Desires/Preferences"]
+    selected_codes = st.multiselect("Select the codes to apply:", code_options)
+
+    # Toggle for explanations
+    include_explanations = st.checkbox("Include explanations with codes")
+
+    # Initialize new columns based on selected options
+    for code in selected_codes:
+        df[f"{code} Code"] = "Pending"
+        if include_explanations:
+            df[f"{code} Explanation"] = ""
+
+    # Button to start coding process
+    if st.button("Apply Coding"):
+        for i, row in df.iterrows():
+            utterance = row["Utterance/Idea Units"]
+
+            if "Cognition" in selected_codes:
+                code_response, explanation = gpt_coder.code_cognitive(utterance)
+                df.at[i, "Cognition Code"] = code_response
+                if include_explanations:
+                    df.at[i, "Cogniton Explanation"] = explanation
+
+            # Example for another coding function, similar to 'code_cognitive'
+            # if "Desires/Preferences" in selected_codes:
+            # Apply your method for desires/preferences coding here
+            # Update the DataFrame similarly
+
+        # Display the updated DataFrame
+        st.dataframe(df)
