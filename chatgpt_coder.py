@@ -6,43 +6,6 @@ class ChatGPTCoder:
         self.client = openai.OpenAI(api_key=openai_api_key)
         openai.api_key = openai_api_key
 
-    def generate_code_no_explination(
-        self, utterance, code_name, keywords, code_definition, code_notes, example
-    ):
-        """
-        Generate code '1' if the utterance meets the code definition criteria, or
-        'X' if it does not, based on keywords, code definition, and code notes.
-        """
-
-        code_notes += "\nKeywords should be used as indicators of the underlying concept or theme being discussed. The presence of a single keyword may be sufficient, but consider the overall context of the utterance. Ambiguous cases should be carefully evaluated."
-
-        try:
-            system_prompt = (
-                f"Analyze if the utterance fits the coding criteria for '{code_name}' based on the keywords and definitions provided. "
-                f"For instance, {example}"
-                f"Do not provide any reasoning or explanation in your response. "
-                f"If the utterance meets the criteria based on the keywords '{keywords}', code definition '{code_definition}', and notes '{code_notes}', an XXX in the utterance indicates an inaudible word."
-                f"simply respond with a '1'. If it does not meet the criteria, respond with an 'X'."
-            )
-
-            response = self.client.chat.completions.create(
-                model="gpt-3.5-turbo",
-                messages=[
-                    {"role": "system", "content": system_prompt},
-                    {"role": "user", "content": utterance},
-                ],
-                max_tokens=10,  # Reduced max_tokens as the expected output is very short
-            )
-
-            # Extract and return only '1' or 'X' from the response
-            code_response = response.choices[0].message.content.strip().upper()
-            # Ensure the response is strictly '1' or 'X'
-            return "1" if code_response == "1" else "X"
-
-        except Exception as e:
-            print(f"Error in generating code: {e}")
-            return "Error"  # Adjust according to how you want to handle errors.
-
     def generate_code(
         self, utterance, code_name, keywords, code_definition, code_notes, example
     ):
