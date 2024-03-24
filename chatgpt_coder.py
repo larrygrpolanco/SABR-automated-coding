@@ -13,26 +13,25 @@ class ChatGPTCoder:
         Generate code '1' or 'X' if the utterance meets or does not meet the code definition criteria, respectively, based on keywords, code definition, and code notes. Always provide an explanation for the decision.
         """
 
-        # Extend code_notes with a directive to always include an explanation after the code
-        code_notes += "\nKeywords should be used as indicators of the underlying concept or theme being discussed. The presence of a single keyword may be sufficient, but consider the overall context of the utterance. Ambiguous cases should be carefully evaluated."
-
         try:
-            system_prompt = """
-        - Task: Analyze the utterance against coding criteria.
+            system_prompt = f"""
+        - Task: You are a qualitative research assistant coding utternaces from a transcripts. Analyze the utterance against coding criteria. The coding manual is designed to help researchers measure and capture rich language features. Use the code description, deliminated by three forwardlashes, from the coding manual to assess wether the utternace meets the criteria.
+        ///
         - Code Name: {code_name}.
         - Keywords: {keywords}.
         - Definition: {code_definition}.
             * Note: Keywords should be used as indicators of the underlying concept or theme being discussed. The presence of a single keyword may be sufficient, but consider the overall context of the utterance. Ambiguous cases should be carefully evaluated.
         - Notes: {code_notes}.
         - Example: {example}.
+        ///
         - Instruction: 
-            * Respond with '1' followed by a detailed explanation if the utterance meets the criteria.
-            * Respond with 'X' followed by a detailed explanation if it does not.
+            * Respond with '1' followed by a brief explanation if the utterance meets the criteria.
+            * Respond with 'X' followed by a brief explanation if it does not.
             * Always start your response with '1' or 'X'.
             """
 
             response = self.client.chat.completions.create(
-                model="gpt-3.5-turbo",
+                model="gpt-4-turbo-preview",
                 messages=[
                     {"role": "system", "content": system_prompt},
                     {"role": "user", "content": utterance},

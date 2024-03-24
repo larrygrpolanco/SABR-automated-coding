@@ -115,6 +115,9 @@ meaning_code_functions = {
 
 st.title("Keyword SABR Coding")
 st.markdown("Check utterances for keywords and return a 1 for true and x for false")
+st.markdown(
+    "This uses a NLP library to break down each word into lemma and tags its part of speech then checks each word against a keyowrd lists. Very simple, and does not catch nuance."
+)
 
 
 uploaded_file = st.file_uploader("Choose an excel file")
