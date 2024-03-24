@@ -10,6 +10,62 @@ class ChatGPTCoder:
         self, utterance, code_name, keywords, code_definition, code_notes, example
     ):
         """
+        Chain of Thought Reasoning
+        Generate code '1' or 'X' if the utterance meets or does not meet the code definition criteria, respectively, based on keywords, code definition, and code notes. Always provide an explanation for the decision.
+        """
+
+        try:
+            delimiter = "####"
+            system_prompt = f"""
+            Follow these steps to answer the customer queries.
+            You are a qualitative research assistant coding utternaces from a transcripts. Analyze the utterance against coding criteria. The coding manual is designed to help researchers measure and capture rich language features. Use the code description, deliminated by four hashtags i.e. {delimiter}, from the coding manual to assess wether the utternace meets the criteria.
+            
+            {delimiter}
+            - Code Name: {code_name}.
+            - Keywords: {keywords}.
+            - Definition: {code_definition}.
+                * Note: Keywords should be used as indicators of the underlying concept or theme being discussed. The presence of a single keyword may be sufficient, but consider the overall context of the utterance. Ambiguous cases should be carefully evaluated.
+            - Notes: {code_notes}.
+            - Example: {example}.
+            {delimiter}
+            
+            - Instruction: 
+            * Respond with '1' followed by a brief explanation if the utterance meets the criteria.
+            * Respond with 'X' followed by a brief explanation if it does not.
+            * Always start your response with '1' or 'X'.
+            """
+
+            response = self.client.chat.completions.create(
+                model="gpt-4-turbo-preview",
+                messages=[
+                    {"role": "system", "content": system_prompt},
+                    {"role": "user", "content": utterance},
+                ],
+                max_tokens=100,  # Increased max_tokens to accommodate the explanation
+            )
+
+            # Extract the response, which includes both the code and the explanation
+            full_response = response.choices[0].message.content.strip()
+
+            # Split the response to separate the code ('1' or 'X') from the explanation
+            code, explanation = full_response[0], full_response[1:].strip()
+
+            # Ensure the code is strictly '1' or 'X'
+            code = "1" if code == "1" else "X"
+
+            return code, explanation
+
+        except Exception as e:
+            print(f"Error in generating code with explanation: {e}")
+            return (
+                "Error",
+                "An error occurred while generating the code and explanation.",
+            )  # Adjust according to how you want to handle errors.
+
+    def generate_code_basic(
+        self, utterance, code_name, keywords, code_definition, code_notes, example
+    ):
+        """
         Generate code '1' or 'X' if the utterance meets or does not meet the code definition criteria, respectively, based on keywords, code definition, and code notes. Always provide an explanation for the decision.
         """
 
