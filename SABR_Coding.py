@@ -82,7 +82,7 @@ if uploaded_file is not None:
         "Judgments/Perspectives",
         "Causal Effects & Problem Solving",
         "Predictions/Forecast",
-        "Define Vocabulary",
+        # "Define Vocabulary",
         "Making Connections",
         "Building Knowledge",
     ]
