@@ -89,7 +89,7 @@ class ChatGPTCoder:
                 "An error occurred while generating the code and explanation.",
             )  # Adjust according to how you want to handle errors.
 
-    def generate_code_basic(
+    def generate_code_old(
         self, utterance, code_name, keywords, code_definition, code_notes, example
     ):
         """
@@ -140,6 +140,7 @@ class ChatGPTCoder:
                 "An error occurred while generating the code and explanation.",
             )  # Adjust according to how you want to handle errors.
 
+    # Meaning Codes
     def code_sequence_temporal(self, utterance):
         code_name = "Sequence/Temporal"
         code_definition = "Involves explicit discussions of when events occurred in a sequence or references to time."
@@ -383,6 +384,431 @@ class ChatGPTCoder:
     * Building knowledge references need not be tightly linked to the text
     * Discussing dialect/translations always references background knowledge about language.
     * This code can include references to general factual talk that is impersonal, but goes beyond the text to build background knowledge.
+    """
+        example = ""
+
+        code_response, explanation = self.generate_code(
+            utterance, code_name, keywords, code_definition, code_notes, example
+        )
+        return code_response, explanation  # Returning both code and explanation
+
+    # Form Codes
+    def code_comment(self, utterance):
+        code_name = "Comment"
+        code_definition = "Declarative sentence form. "
+        keywords = ""
+        code_notes = """
+●	These are the most common utterance form. 
+●	Declarative sentences that convey information or make statements. 
+o	They do not demand a response from the listener.
+●	Comments end in a period or exclamation mark.
+●	If an utterance does not neatly fit one of these utterance forms, assume it is a comment by default.
+    """
+        example = """
+●	T: I will keep reading now.
+●	T: He is the king of the jungle.
+●	T: She is the main character. 
+●	T: Bossy means she always wants to be in charge.
+●	C: I see a dragon.
+●	C: They have the same pigeon book as us.
+●	C: Her name is Petunia.
+"""
+
+        code_response, explanation = self.generate_code(
+            utterance, code_name, keywords, code_definition, code_notes, example
+        )
+        return code_response, explanation  # Returning both code and explanation
+
+    def code_directive(self, utterance):
+        code_name = "Directive"
+        code_definition = "Imperative sentence form that elicits a response or behavior from the listener."
+        keywords = """
+    """
+        code_notes = """
+●	Imperative sentences that issue orders.
+●	They require a response (verbal) or action (non-verbal) from the listener
+●	Directives end with a period or exclamation mark. 
+●	Teachers often use “Let’s” to gently imply a directive.
+    """
+        example = """
+●	T: Sit criss-cross applesauce.
+●	T: Don’t interrupt! 
+●	T: Say this word. 
+●	T: Show me where you see the words.
+●	T: Make a prediction. 
+●	T: Let’s make a prediction. 
+●	C: Give me a turn.
+●	C: Look at his toy.
+●	C: Show me which one.
+●	C: Don’t touch me!
+"""
+
+        code_response, explanation = self.generate_code(
+            utterance, code_name, keywords, code_definition, code_notes, example
+        )
+        return code_response, explanation  # Returning both code and explanation
+
+    def code_question(self, utterance):
+        code_name = "Question"
+        code_definition = (
+            "Interrogative sentence form that elicits a response from the listener."
+        )
+        keywords = """
+
+    """
+        code_notes = """
+●	Questions elicit information from the listener.
+●	Code rhetorical questions (i.e., tag questions) due to rising intonation at end of utterance
+●	They end with a question mark.
+    """
+        example = """
+●	T: Why are you interrupting again?
+●	T: How do you say this word? 
+●	T: That wasn’t very nice, was it?
+●	C: When do I get a turn?
+●	C: Why doesn’t she just ask him nicely?
+●	C: Which one?
+"""
+
+        code_response, explanation = self.generate_code(
+            utterance, code_name, keywords, code_definition, code_notes, example
+        )
+        return code_response, explanation  # Returning both code and explanation
+
+    # Requires Question
+    def code_single_word(self, utterance):
+        code_name = "Single Word"
+        code_definition = "Questions that have a limited set of possible answers, many of which are a single word. "
+        keywords = """
+
+    """
+        code_notes = """
+●	If a question can be adequately answered with an article and a noun (e.g., The girl), code as Single Word.
+●	Do not attend to how many words the child actually produces.
+●	Even “difficult” questions can adequately be answered with one word. 
+    """
+        example = """
+●	T: What is this?
+●	T: Where’s the title?
+●	T: What’s this letter?
+●	T: What is the character’s name?
+●	T: X, isn't he?
+●	T: X, doesn't it?
+●	T: Oh you do, do you?
+●	T: That’s a big one, huh?
+●	T: You need help? (yes/no)
+●	T: Can you move over?
+●	T: Can you show me the letter B?
+●	T: What do you think we will find?
+●	T: Do you know what a flea is?
+"""
+
+        code_response, explanation = self.generate_code(
+            utterance, code_name, keywords, code_definition, code_notes, example
+        )
+        return code_response, explanation  # Returning both code and explanation
+
+    def code_multiple_words(self, utterance):
+        code_name = "Multiple Words"
+        code_definition = "Questions that have a wider set of possible answers and usually require a multiple-word response. "
+        keywords = """
+
+    """
+        code_notes = """
+●	These questions require more than a one word answer. An acceptable answer requires at least two words or more (not including articles).
+●	These questions elicit more elaborate talk from children and are often nonspecific requests for information.
+●	Articles (a, the) do not count as Multiple Words.
+    """
+        example = """
+●	T: How do you know?
+●	T: Why ___?
+●	T: What might have caused that to happen?
+●	T: How did that happen?
+●	T: What do you predict will happen next?
+●	T: What do you think will happen next?
+●	T: What did he mean by that? 
+●	T: What does ___ (word) mean?
+"""
+
+        code_response, explanation = self.generate_code(
+            utterance, code_name, keywords, code_definition, code_notes, example
+        )
+        return code_response, explanation  # Returning both code and explanation
+
+    def code_auxiliary_verb(self, utterance):
+        code_name = "Auxiliary Verb Questions"
+        code_definition = (
+            "An auxiliary verb is at the beginning or within the question."
+        )
+        keywords = """
+Keywords: Have (Has, Had, Having), Can (Could), Do (Does, Did), Will (Would), all “To Be“ forms (Am, Is, Are, Was, Were, Being, Been, etc.), May, Might, Must, Need, Shall, Should
+Possible keyword: Dare (Dare you…?)
+    """
+        code_notes = """
+●	Auxiliary verbs are helper verbs. Moving these to the front of a sentence turns it into a question.
+●	In English, polar interrogatives (yes/no questions) are formed by fronting an auxiliary verb.
+●	The response to these questions is usually yes/no. 
+●	Auxiliary verbs are often at the front of the question (Will he feel sad?), but not always (If you take that from Diego, will he be sad?).
+Do not code questions that are missing the auxiliary verb (e.g., You think he looks cool?) in this category.
+    """
+        example = """
+●	T: Do you like it?
+●	T: Will he go?
+●	T: Have you been to the jungle before?
+●	T: Can you find the letter B?
+●	T: May I have another?
+●	T: Would you like a turn?
+●	T: If Petunia doesn’t share, will Diego be sad?
+●	T: Do you think they’ll stay mad or be friends again?
+●	T: When the bears come home, do you think they’ll be surprised to see Goldilocks?
+"""
+
+        code_response, explanation = self.generate_code(
+            utterance, code_name, keywords, code_definition, code_notes, example
+        )
+        return code_response, explanation  # Returning both code and explanation
+
+    def code_yes_no(self, utterance):
+        code_name = "Yes/No Questions"
+        code_definition = "Questions that do not have an auxiliary verb present but can be answered with “yes” or “no.”"
+        keywords = """
+
+    """
+        code_notes = """
+●	This is a slightly more informal way of asking a yes/no question than an auxiliary-fronted question.
+●	Listen for a rise in intonation to infer that these utterances are questions. 
+●	Code tag questions in this category. Questions tagged onto the end of a declarative sentence are typically rhetorical questions or are seeking a simple affirmation.
+●	These questions end with a question mark, but they may not demand a response from the listener.
+●	Either/or, forced-choice questions are designed to elicit a simple response so they are also coded as Yes/No Q unless they meet another category:
+o	Do you want a red or blue crayon? = Auxiliary Q
+o	Want a red or blue crayon?  = Yes/No Q
+    """
+        example = """
+●	T: You like it?
+●	T: See it?
+●	T: You’ve been to the jungle before?
+●	T: Remember?
+●	T: You want a turn?
+●	T: Ready?
+●	X, hasn't he? 
+●	X, didn't he? 
+●	X, isn't he? 
+●	X, doesn’t it?
+●	X, won't he? 
+●	X, shouldn't he? 
+●	X, can't he? 
+●	X, okay?
+●	X, right?
+●	X, is she? 
+●	Do X, will you? 
+●	Oh, am I? 
+●	X, do you?
+●	X, won't you? 
+●	X, is it? 
+●	X, aren't I?
+●	X, aren't you?
+●	X, shall we? 
+●	X, huh?
+●	X, maybe?
+"""
+
+        code_response, explanation = self.generate_code(
+            utterance, code_name, keywords, code_definition, code_notes, example
+        )
+        return code_response, explanation  # Returning both code and explanation
+
+    def code_wh_question(self, utterance):
+        code_name = "Wh- Questions"
+        code_definition = "Wh- basic question + interrogative sentence form."
+        keywords = """
+Keywords: Who, what, when, where, which
+    """
+        code_notes = """
+●	Start with or contain one wh- question word.
+●	You may code a question that contains a wh- question word in a position other than the initial position.
+Note: Do not code “why” questions here - those are coded elsewhere because they tend to elicit a more elaborate response.
+    """
+        example = """
+●	T: What happened?
+●	T: Where is the setting of this story?
+●	T: Who is this character?
+●	T: Which center are they in?
+●	T: This is a what? 
+●	T: You want to see who?
+"""
+
+        code_response, explanation = self.generate_code(
+            utterance, code_name, keywords, code_definition, code_notes, example
+        )
+        return code_response, explanation  # Returning both code and explanation
+
+    def code_why_questions(self, utterance):
+        code_name = "Why Questions "
+        code_definition = "Why + interrogative sentence form."
+        keywords = """
+Keywords: why
+    """
+        code_notes = """
+●	Must include the word “why.”
+●	You may code a question that contains “why” in a position other than the initial position.
+    """
+        example = """
+●	T: Why do you think that?
+●	T: She did that why?
+"""
+
+        code_response, explanation = self.generate_code(
+            utterance, code_name, keywords, code_definition, code_notes, example
+        )
+        return code_response, explanation  # Returning both code and explanation
+
+    def code_how_questions(self, utterance):
+        code_name = "How Questions"
+        code_definition = "How + interrogative sentence form."
+        keywords = """
+Keywords: how
+    """
+        code_notes = """
+●	Must include the word “how.”
+●	You may code a question that contains “how” in a position other than the initial position.
+    """
+        example = """
+●	T: How does this compare to ___?
+●	T: How do you know?
+●	T: How many does she have?
+●	T: She was feeling how?
+"""
+
+        code_response, explanation = self.generate_code(
+            utterance, code_name, keywords, code_definition, code_notes, example
+        )
+        return code_response, explanation  # Returning both code and explanation
+
+    def code_real_questions(self, utterance):
+        code_name = "Real Questions"
+        code_definition = "Real questions seek unknown information that the teacher does not already know."
+        keywords = """
+
+    """
+        code_notes = """
+●	Information-seeking questions presume the questioner does not have the information (i.e., child is being asked to provide real/unknown/necessary information the adult does not have).
+●	This could relate to children’s feelings, preferences, desires, opinions or other cognitive things one cannot know about another person without asking.
+●	Some common topics that require a real question are making a connection to child’s own life; predicting what will happen next; and asking about a child’s own cognition, feelings, or desires. 
+Note: The word “think” or other cognitive terms may indicate a real or test question. Coders must use their judgment to determine if seeking child’s opinion, perspective, feelings, etc. as real, unknown information.
+    """
+        example = """
+●	T: What is your favorite color/part?
+●	T: What do you think?
+●	T: How do you want to do it?
+●	T: How was school today?
+●	T: Where would you like to go?
+●	T: Which one is most like you?
+●	T: Do you think he should forgive her? 
+"""
+
+        code_response, explanation = self.generate_code(
+            utterance, code_name, keywords, code_definition, code_notes, example
+        )
+        return code_response, explanation  # Returning both code and explanation
+
+    def code_test_questions(self, utterance):
+        code_name = "Test Questions"
+        code_definition = "Known questions are testing the child’s knowledge or understanding of a topic. "
+        keywords = """
+
+    """
+        code_notes = """
+●	Known-information or test questions have a known correct answer or parameters in which correct answers should fall.
+●	The purpose is to evaluate the child’s response accuracy. This is a way of asking children to display knowledge.
+●	Known questions CAN have more than one correct answer, but the acceptable answers or parameters in which correct answers should fall is known by the teacher in advance.
+●	These questions are of interest because they position the teacher as the primary knower.
+Note: The word “think” or other cognitive terms may indicate a test question. Coders must use their judgment to determine if the teacher is seeking child’s understanding and comprehension of the explicit text events. (Do you think this is front cover? Do you think Petunia is sad?)
+    """
+        example = """
+●	T: What color is that?
+●	T: Do you think this is make-believe? 
+●	T: How did he do it?
+●	T: How was Petunia’s day at school?
+●	T: Where did he go to write her the T: note?
+●	T: Which character is bossy? 
+●	T: What are you supposed to be doing?
+●	T: How many crayons does he have?
+"""
+
+        code_response, explanation = self.generate_code(
+            utterance, code_name, keywords, code_definition, code_notes, example
+        )
+        return code_response, explanation  # Returning both code and explanation
+
+    # Child Codes
+    def code_child_single_word(self, utterance):
+        code_name = "Single Word"
+        code_definition = "These child utterances include codeable words and generally contain a single word. "
+        keywords = """
+
+    """
+        code_notes = """
+●	Single-word utterances reflect a simple meaning because they contain only one word or a word + an article. Articles are a, an, the.
+●	Code single letter names, letter sounds, or spellings of a word.
+●	Code when children repeat a word. 
+●	Rote counting is a single word because it is an overly routinized behavior.
+●	If a child produces a single word utterance but makes self-correction in a single row, code.
+●	It is a single word when child stutters or has a false start.
+●	Compound words are a single word.
+    """
+        example = """
+●	C: The dragon. = Article + word 
+●	C: /b/ = Letter sound 
+●	C: Look, look. = Same word repeated
+●	C: 1, 2, 3, 4, 5…
+●	C: Dinosaur… Dragon = Correction
+●	C: Ed-Ed-Edwina.
+●	C: Backpack
+"""
+
+        code_response, explanation = self.generate_code(
+            utterance, code_name, keywords, code_definition, code_notes, example
+        )
+        return code_response, explanation  # Returning both code and explanation
+
+    def code_child_mulitple_word(self, utterance):
+        code_name = "Multiple Words"
+        code_definition = ""
+        keywords = """
+
+    """
+        code_notes = """
+●	Multiword utterances contain 2+ novel words.
+●	Code partially inaudible talk with at least two understandable words.
+●	Singing songs is always multiword.
+●	Many simple phrases can be multiword.
+●	Common word pairs are multiword if spelled as two words.
+●	Although adding an article to a noun is not sufficient for multiword, adding conjunctions or prepositions before a noun is sufficient.
+    """
+        example = """
+●	C: There’s a lot of letters in this book.
+●	C: Bossypants is a silly name.
+●	C: Mean bossypants.
+●	C: I know there’s a lot of letters in this book because I know my ABCs. 
+●	C: Most days.
+●	C: All night.
+●	C: Ice cream!
+●	C: Can’t see.
+"""
+
+        code_response, explanation = self.generate_code(
+            utterance, code_name, keywords, code_definition, code_notes, example
+        )
+        return code_response, explanation  # Returning both code and explanation
+
+    def code_placeholder(self, utterance):
+        code_name = ""
+        code_definition = ""
+        keywords = """
+
+    """
+        code_notes = """
+
     """
         example = ""
 
