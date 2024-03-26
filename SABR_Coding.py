@@ -189,7 +189,9 @@ if uploaded_file is not None:
             end_time = time.time()  # Step 3
             duration_seconds = end_time - start_time  # Step 4
             duration_minutes = duration_seconds / 60  # Convert seconds to minutes
-            st.success(f"Coding completed successfully in {duration_minutes:.2f} minutes!")
+            st.success(
+                f"Coding completed successfully in {duration_minutes:.2f} minutes!"
+            )
 
             # Display the updated DataFrame
             st.dataframe(df)
