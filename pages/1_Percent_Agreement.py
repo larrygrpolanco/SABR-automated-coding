@@ -62,14 +62,10 @@ if "df1" in st.session_state and "df2" in st.session_state:
     df2 = st.session_state["df2"]
     common_columns = df1.columns.intersection(df2.columns)
 
-    # Use an expander to hold the checklist
-    with st.expander("Select columns to compare"):
-        columns_to_compare = []
-        for column in common_columns:
-            # Create a checkbox for each common column
-            if st.checkbox(column, key=column):
-                columns_to_compare.append(column)
-
+    columns_to_compare = st.multiselect(
+        "Choose columns",
+        options=common_columns,
+    )
     if st.button("Calculate Agreement"):
         if df1.shape[0] == df2.shape[0]:
             agreement_results = calculate_agreement(df1, df2, columns_to_compare)

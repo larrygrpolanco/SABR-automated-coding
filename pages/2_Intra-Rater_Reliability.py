@@ -38,7 +38,7 @@ def calculate_percent_agreement(dfs, columns_to_compare):
     return np.mean(agreement_scores) if agreement_scores else None
 
 
-st.title("Intra-Rater Pairwise Reliability Checker")
+st.title("Intra-Rater Reliability Checker")
 st.markdown(
     "Program takes in tables and checks agreement for every combination in pairs then gives the mean agreement."
 )
@@ -55,11 +55,10 @@ with st.expander("Load Files"):
 if len(dataframes) >= 2:
     common_columns = list(set.intersection(*(set(df.columns) for df in dataframes)))
 
-    with st.expander("Select Columns to Compare"):
-        columns_to_compare = st.multiselect(
-            "Choose columns",
-            options=common_columns,
-        )
+    columns_to_compare = st.multiselect(
+        "Choose columns",
+        options=common_columns,
+    )
 
     if st.button("Calculate Intra-Rater Reliability"):
         percent_agreement = calculate_percent_agreement(dataframes, columns_to_compare)
