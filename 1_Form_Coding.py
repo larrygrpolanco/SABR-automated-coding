@@ -1,3 +1,5 @@
+# Work in Progress!!!
+
 import streamlit as st
 import pandas as pd
 import time
@@ -43,14 +45,15 @@ if uploaded_file is not None:
         "Multiple Words",
         "Wh- basic",
         "Why",
-        "How"
-        "Auxiliary-fronted",
+        "How" "Auxiliary-fronted",
         "Yes/No",
         "Real",
         "Test",
     ]
     selected_question_codes = st.multiselect(
-        "Select the question codes to apply:", question_code_options, default=question_code_options
+        "Select the question codes to apply:",
+        question_code_options,
+        default=question_code_options,
     )
 
     child_code_options = [
@@ -58,7 +61,9 @@ if uploaded_file is not None:
         "Child Multiple Word",
     ]
     selected_child_codes = st.multiselect(
-        "Select the child codes to apply:", child_code_options, default=child_code_options
+        "Select the child codes to apply:",
+        child_code_options,
+        default=child_code_options,
     )
 
 
@@ -87,8 +92,6 @@ if st.button("Apply Coding"):
                     df.at[i, form_code] = code_response  # Use form_code as column name
                     if include_explanations:
                         df.at[i, f"{form_code} Explanation"] = explanation
-
-
 
         end_time = time.time()
         st.success(f"Coding completed in {end_time - start_time:.2f} seconds.")

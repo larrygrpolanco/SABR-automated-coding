@@ -14,54 +14,63 @@ with st.expander("Prompting Scheme"):
     st.caption(
         "The system prompt dynamically changes depedning on the code and then each then each utterance is checked against the prompt."
     )
-    st.code('''
+    st.caption(
+        "The delimiters are used for pasring i.e., seperating the code (1 or X) from the rest of the output. OpenAI have just added a new JSON mode which could make this easier."
+    )
+    st.code(
+        """
         - Task: You are a qualitative research assistant coding utternaces for meaning related codes. Analyze the utterance against coding criteria. The aim of this coding is to help researchers measure and examines qualities of teacher and child talk. Use the given rules for applying codes from the coding manual, deliminate by four hashtags i.e. {delimiter}, to assess wether the utternace meets the criteria. \
             
             {delimiter}
-            Coding Manual: \
-            - Meaning-related code Name: {code_name}. \
-            - Definition: {code_definition}. ]
-            - Keywords: {keywords}. \
-            - Code Notes: {code_notes}. \
-            - Example: {example}. \
+            Coding Manual: 
+            - Meaning-related code Name: {code_name}. 
+            - Definition: {code_definition}.
+            - Keywords: {keywords}. 
+            - Code Notes: {code_notes}. 
+            - Example: {example}. 
             {delimiter}
 
             Follow these steps. \
             
-            Step 1: {delimiter} Step 1: Analyze the presence of keywords and review code notes to conclude whether the utterance meets the criteria for the code. \
+            Step 1: {delimiter} Analyze the presence of keywords and review code notes to conclude whether the utterance meets the criteria for the code. \
 
-            Step 2: {delimiter} determine if code applies to utterance \
-            * Respond with '1' followed by a brief explanation if the utterance meets the criteria. \
-            * Respond with 'X' followed by a brief explanation if it does not. \
-            * Only respond with an '1' or 'X' and nothing else \
+            Step 2: {delimiter} determine if code applies to utterance 
+            * Respond with '1' followed by a brief explanation if the utterance meets the criteria. 
+            * Respond with 'X' followed by a brief explanation if it does not. 
+            * Only respond with an '1' or 'X' and nothing else 
 
-            Use the following format: \
+            Use the following format: 
             Step 1:{delimiter} <Your decision-making process analysis. Summarize how the coding manual lead you to conclude whether the utterance meets the criteria for the code.> \
 
             Step 2:{delimiter}<Your final code decision. Only include '1' if the utterance meets the criteria, or 'X' if it does not. No additional text should be here.> \
 
-            Example input: \
+            Example input: 
             Can you think of the names of other plants that need to grow on many acres of land?
 
-            Example Output: \
-            Step 1:#### TThis utterance meets the criteria for the Compare/Contrast code as it explicitly refers to sharing food by giving everyone a fraction of it instead of the whole thing, highlighting a comparison between sharing practices for certain food items. \
+            Example Output: 
+            Step 1:{delimiter} This utterance meets the criteria for the Compare/Contrast code as it explicitly refers to sharing food by giving everyone a fraction of it instead of the whole thing, highlighting a comparison between sharing practices for certain food items. \
 
-            Step 2:#### 1
+            Step 2:{delimiter} 1
 
             Make sure to include {delimiter} to separate every step.
-            '''
+            """
     )
     st.header("Code w/variables example")
     st.caption("Taxonomy taken from SABR Transcript Coding Manual")
     st.code(
         '''
         code_name = "Sequence/Temporal"
+        
         code_definition = "Involves explicit discussions of when events occurred in a sequence or references to time."
-        keywords = """
+        
+        keywords = 
+        """
         Keywords sequential order: first, second, third, next, last, begin (beginning), middle, end, ,  last, after, earlier, before, final (finally) 
         Keywords time: day (yesterday, today, Monday and all variations), tomorrow, time (meantime, sometime), minute, second (as in 60 seconds), morning, daytime, evening, nighttime
         """
-            code_notes = """
+        
+        code_notes = 
+        """
         * Reference to time and temporal ordering 
         * These are tools of good writers/storytellers and are abstract to young children 
         * Reference to a sequence/temporal ordering of events within or across pages 
@@ -69,8 +78,9 @@ with st.expander("Prompting Scheme"):
         * References to time can include specifically telling time or using a calendar, or more general orientations in time
         * Do not code temporal language that is behavior-related or speed in relation to time. 
         """
+        
         example = ""
-            '''
+        '''
     )
 
 # File uploader widget
@@ -105,7 +115,7 @@ if uploaded_file is not None:
         "Making Connections",
         "Building Knowledge",
     ]
-    
+
     selected_codes = st.multiselect(
         "Select the codes to apply:", code_options, default=code_options
     )

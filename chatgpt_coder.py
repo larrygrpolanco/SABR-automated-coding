@@ -20,35 +20,33 @@ class ChatGPTCoder:
             - Task: You are a qualitative research assistant coding utternaces for meaning related codes. Analyze the utterance against coding criteria. The aim of this coding is to help researchers measure and examines qualities of teacher and child talk. Use the given rules for applying codes from the coding manual, deliminate by four hashtags i.e. {delimiter}, to assess wether the utternace meets the criteria. \
             
             {delimiter}
-            Coding Manual: \
-            - Meaning-related code Name: {code_name}. \
+            Coding Manual: 
+            - Meaning-related code Name: {code_name}. 
             - Definition: {code_definition}. ]
-            - Keywords: {keywords}. \
-            - Code Notes: {code_notes}. \
-            - Example: {example}. \
+            - Keywords: {keywords}. 
+            - Code Notes: {code_notes}. 
+            - Example: {example}. 
             {delimiter}
 
-            Follow these steps. \
-            
-            Step 1: {delimiter} Step 1: Analyze the presence of keywords and review code notes to conclude whether the utterance meets the criteria for the code. \
+            Follow these steps. 
+            Step 1: {delimiter} Analyze the presence of keywords and review code notes to conclude whether the utterance meets the criteria for the code. \
 
-            Step 2: {delimiter} determine if code applies to utterance \
-            * Respond with '1' followed by a brief explanation if the utterance meets the criteria. \
-            * Respond with 'X' followed by a brief explanation if it does not. \
+            Step 2: {delimiter} determine if code applies to utterance 
+            * Respond with '1' followed by a brief explanation if the utterance meets the criteria. 
+            * Respond with 'X' followed by a brief explanation if it does not. 
             * Only respond with an '1' or 'X' and nothing else \
 
-            Use the following format: \
+            Use the following format: 
             Step 1:{delimiter} <Your decision-making process analysis. Summarize how the coding manual lead you to conclude whether the utterance meets the criteria for the code.> \
 
-            Step 2:{delimiter}<Your final code decision. Only include '1' if the utterance meets the criteria, or 'X' if it does not. No additional text should be here.> \
+            Step 2:{delimiter} <Your final code decision. Only include '1' if the utterance meets the criteria, or 'X' if it does not. No additional text should be here.> \
 
-            Example input: \
+            Example input: 
             Can you think of the names of other plants that need to grow on many acres of land?
 
-            Example Output: \
-            Step 1:#### TThis utterance meets the criteria for the Compare/Contrast code as it explicitly refers to sharing food by giving everyone a fraction of it instead of the whole thing, highlighting a comparison between sharing practices for certain food items. \
-
-            Step 2:#### 1
+            Example Output: 
+            Step 1:{delimiter} This utterance meets the criteria for the Compare/Contrast code as it explicitly refers to sharing food by giving everyone a fraction of it instead of the whole thing, highlighting a comparison between sharing practices for certain food items. 
+            Step 2:{delimiter} 1
 
             Make sure to include {delimiter} to separate every step.
             """

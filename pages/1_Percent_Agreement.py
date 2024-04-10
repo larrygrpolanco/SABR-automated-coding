@@ -13,13 +13,15 @@ def load_dataframe(file):
 
 
 def calculate_agreement(df1, df2, columns_to_compare):
-    """Calculate agreement percentage for the selected columns."""
+    """Calculate agreement percentage for the selected columns, treating numbers as strings for comparison."""
     agreement_results = {}
     for col in columns_to_compare:
+        df1_col_as_str = df1[col].astype(str)  # Convert column values to strings
+        df2_col_as_str = df2[col].astype(str)  # Convert column values to strings
         non_null_mask = ~df1[col].isnull() & ~df2[col].isnull()
         if non_null_mask.sum() > 0:
             agreement = (
-                (df1[col] == df2[col]) & non_null_mask
+                (df1_col_as_str == df2_col_as_str) & non_null_mask
             ).sum() / non_null_mask.sum()
             agreement_results[col] = agreement * 100  # Convert to percentage
         else:
@@ -28,21 +30,22 @@ def calculate_agreement(df1, df2, columns_to_compare):
 
 
 def highlight_disagreements(row, df2, columns_to_compare):
-    """Highlight cells where values don't match."""
+    """Highlight cells where values don't match, treating numbers as strings for comparison."""
     disagreement_style = []
     for col in row.index:
-        if col in columns_to_compare and row[col] != df2.at[row.name, col]:
+        if col in columns_to_compare and str(row[col]) != str(df2.at[row.name, col]):
             disagreement_style.append("background-color: yellow")
         else:
             disagreement_style.append("")
     return disagreement_style
 
 
+
 st.title("Coding Agreement")
 
 
 # File uploaders in an expander
-with st.sidebar.expander("Load CSV files"):
+with st.expander("Load CSV files"):
     file1 = st.file_uploader(
         "Choose the first spreadsheet file", key="file1", type=["csv", "xlsx"]
     )
@@ -60,7 +63,7 @@ if "df1" in st.session_state and "df2" in st.session_state:
     common_columns = df1.columns.intersection(df2.columns)
 
     # Use an expander to hold the checklist
-    with st.sidebar.expander("Select columns to compare"):
+    with st.expander("Select columns to compare"):
         columns_to_compare = []
         for column in common_columns:
             # Create a checkbox for each common column
