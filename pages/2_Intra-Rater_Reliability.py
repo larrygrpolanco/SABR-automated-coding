@@ -69,13 +69,6 @@ if len(dataframes) >= 2:
                 "Could not calculate percent agreement. Ensure there are common columns with data to compare."
             )
 
-    if "agreement_results" in st.session_state:
-        display_agreement = pd.DataFrame(
-            list(st.session_state["agreement_results"].items()),
-            columns=["Column", "Agreement (%)"],
-        )
-        st.dataframe(display_agreement)
-
     for i, df in enumerate(dataframes, start=1):
         if st.button(f"Show File {i}"):
             st.dataframe(df)
