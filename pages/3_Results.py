@@ -24,28 +24,71 @@ with st.expander("SABR Offical Practice Transcript"):
 
 st.divider()
 
-st.title("Methods/Results")
-st.markdown(
-    "There were many iterations of this program, but I will just go through the most recent. I have not tried to improve the mothods or results. I am not sure how best to continue."
+st.header("Extension Questions Tests")
+
+results_col1, results_col2 = st.columns(2)
+results_col1.subheader("Let's Read to Find Out")
+results_col1.markdown(
+    "**Utterances:** 69  \n**Time:** x  \n**Cost:** x  \n**Overall Agreement:** x"
 )
 
-with st.expander("Chain-of-Though Prompting"):
-    st.markdown(
-        "Prompting scheme modeled after a paper on chain of thought prompting -- a series of intermediate reasoning steps -- significantly improves the ability of large language models to perform complex reasoning"
-    )
-    st.code(
-        """
-    Use the following format: 
-    Step 1:{delimiter} <Your decision-making process analysis. Summarize how the coding manual lead you to conclude whether the utterance meets the criteria for the code.> 
-    Step 2:{delimiter}<Your final code decision. Only include '1' if the utterance meets the criteria, or 'X' if it does not. No additional text should be here.> 
-            """
-    )
-    st.markdown("Can definetly be imporved with testing.")
-    st.caption(
-        "Reference  \nWei, J., Wang, X., Schuurmans, D., Bosma, M., Xia, F., Chi, E., ... & Zhou, D. (2022). Chain-of-thought prompting elicits reasoning in large language models. Advances in neural information processing systems, 35, 24824-24837. https://doi.org/10.48550/arXiv.2201.11903 "
-    )
+results_col2.subheader("Vocabulary Extensions")
+results_col2.markdown(
+    "**Utterances:** 89  \n**Time:** x  \n**Cost:** x  \n**Overall Agreement:** x"
+)
+
+with results_col1.expander("**Results**"):
+    st.caption("placeholder")
+    # tesol_sabr_df = pd.read_csv("")
+    # st.dataframe(tesol_sabr_df)
+
+with results_col2.expander("**Results**"):
+    st.caption("placeholder")
+    # tesol_sabr_df = pd.read_csv("")
+    # st.dataframe(tesol_sabr_df)
+
 
 st.divider()
+
+st.header("TESOL SABR Tests")
+
+tesol_results_col1, tesol_results_col2 = st.columns(2)
+tesol_results_col1.subheader("10% Random Sample")
+tesol_results_col1.markdown(
+    "**Utterances:** 160  \n**Time:** x  \n**Cost:** x  \n**Overall Agreement:** x"
+)
+
+tesol_results_col2.subheader("20% Random Sample")
+tesol_results_col2.markdown(
+    "**Utterances:** 321  \n**Time:** x  \n**Cost:** x  \n**Overall Agreement:** x"
+)
+
+with tesol_results_col1.expander("**Results**"):
+    st.caption("placeholder")
+    # tesol_sabr_df = pd.read_csv("")
+    # st.dataframe(tesol_sabr_df)
+
+with tesol_results_col2.expander("**Results**"):
+    st.caption("placeholder")
+    # tesol_sabr_df = pd.read_csv("")
+    # st.dataframe(tesol_sabr_df)
+
+st.divider()
+
+st.header("Official SABR")
+
+st.markdown(
+    "**Utterances:** 301  \n**Time:** x  \n**Cost:** x  \n**Overall Agreement:** x"
+)
+
+
+with st.expander("**Results**"):
+    st.caption("placeholder")
+    # tesol_sabr_df = pd.read_csv("")
+    # st.dataframe(tesol_sabr_df)
+
+st.divider()
+
 st.subheader("Single Code - Only True")
 code_ex_col1, code_ex_col2 = st.columns(2)
 
@@ -53,7 +96,7 @@ code_ex_col1.markdown("#")
 code_ex_col1.markdown(
     "All utterances coded 1 for a specific code was collected from the SABR TESOL total then 20 utterances were randomly selected."
 )
-code_ex_col1.markdown("* Each set was coded four times.")
+code_ex_col1.markdown("Each set was coded four times.")
 code_ex_col1.markdown(
     "Intra-rater reliability is the mean agreement across every pair combination."
 )
@@ -104,23 +147,3 @@ with st.expander("Judgment & Perspective (48.75%)"):
     st.dataframe(df_seq)
 
 st.divider()
-
-st.subheader("TESOL SABR Tests")
-st.caption("Sequence/Temporal, Compare/Contrast, Cognition, Desires/Preferences"
-        "Feelings/Emotions",
-        "Judgments/Perspectives",
-        "Causal Effects & Problem Solving",
-        "Predictions/Forecast",
-        "Making Connections",
-        "Building Knowledge"
-tesol_col1, tesol_col2 = st.columns(2)
-tesol_col1.subheader("10% Random Sample")
-tesol_col1.markdown("**Utterances:** 160  \n**Time:** x  \n**Cost:** x  ")
-
-tesol_col2.subheader("20% Random Sample")
-tesol_col2.markdown("**Utterances:** 321  \n**Time:** x  \n**Cost:** x  ")
-
-with st.expander("**Results**"):
-    st.caption("placeholder")
-    # tesol_sabr_df = pd.read_csv("")
-    # st.dataframe(tesol_sabr_df)

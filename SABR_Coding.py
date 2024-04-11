@@ -83,6 +83,17 @@ with st.expander("Prompting Scheme"):
         '''
     )
 
+
+with st.expander("Chain-of-thought Prompting"):
+    st.markdown(
+        "Prompting scheme modeled after a paper on chain of thought prompting -- a series of intermediate reasoning steps -- significantly improves the ability of large language models to perform complex reasoning"
+    )
+
+    st.markdown("Can definetly be imporved with testing.")
+    st.caption(
+        "Reference  \nWei, J., Wang, X., Schuurmans, D., Bosma, M., Xia, F., Chi, E., ... & Zhou, D. (2022). Chain-of-thought prompting elicits reasoning in large language models. Advances in neural information processing systems, 35, 24824-24837. https://doi.org/10.48550/arXiv.2201.11903 "
+    )
+
 # File uploader widget
 uploaded_file = st.file_uploader("Choose an Excel file")
 if uploaded_file is not None:

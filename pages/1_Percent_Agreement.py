@@ -41,7 +41,7 @@ def highlight_disagreements(row, df2, columns_to_compare):
 
 
 
-st.title("Coding Agreement")
+st.title("Percent Agreement")
 
 
 # File uploaders in an expander
