@@ -3,7 +3,7 @@ import pandas as pd
 
 
 st.title("Data")
-with st.expander("Extension Questions"):
+with st.expander("Curriculum Questions"):
     st.markdown(
         "Let's Read to Find Out (69 utterances)  \nExtension Questions (86 utterances)"
     )
@@ -24,7 +24,7 @@ with st.expander("SABR Offical Practice Transcript"):
 
 st.divider()
 
-st.header("Extension Questions Tests")
+st.header("Curriculum AutoCoding")
 
 results_col1, results_col2 = st.columns(2)
 results_col1.subheader("Let's Read to Find Out")
@@ -32,9 +32,9 @@ results_col1.markdown(
     "**Utterances:** 69  \n**Time:** x  \n**Cost:** x  \n**Overall Agreement:** x"
 )
 
-results_col2.subheader("Vocabulary Extensions")
+results_col2.subheader("Extension Questions")
 results_col2.markdown(
-    "**Utterances:** 89  \n**Time:** x  \n**Cost:** x  \n**Overall Agreement:** x"
+    "**Utterances:** 84  \n**Time:** x  \n**Cost:** x  \n**Overall Agreement:** x"
 )
 
 with results_col1.expander("**Results**"):
@@ -50,7 +50,7 @@ with results_col2.expander("**Results**"):
 
 st.divider()
 
-st.header("TESOL SABR Tests")
+st.header("TESOL SABR AutoCoding")
 
 tesol_results_col1, tesol_results_col2 = st.columns(2)
 tesol_results_col1.subheader("10% Random Sample")
@@ -75,7 +75,7 @@ with tesol_results_col2.expander("**Results**"):
 
 st.divider()
 
-st.header("Official SABR")
+st.header("Official SABR AutoCoding")
 
 st.markdown(
     "**Utterances:** 301  \n**Time:** x  \n**Cost:** x  \n**Overall Agreement:** x"
