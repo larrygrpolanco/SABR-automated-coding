@@ -26,22 +26,22 @@ st.divider()
 
 st.header("Curriculum Questions")
 
-results_col1, results_col2 = st.columns(2)
-results_col1.subheader("Let's Read to Find Out")
-results_col1.markdown(
+
+st.subheader("Let's Read to Find Out (73.33%)")
+st.markdown(
     "**Utterances:** 24  \n**Time:** 19 minutes  \n**Cost:** $2.47  \n**Overall Agreement:** 73.33%"
 )
 
-with results_col1.expander("**Results**"):
+with st.expander("**Results**"):
     lrtfo_df = pd.read_csv("data/LRTFO_agreement.csv")
     st.dataframe(lrtfo_df.set_index(lrtfo_df.columns[0]))
 
-results_col2.subheader("Extension Questions")
-results_col2.markdown(
+st.subheader("Extension Questions (87.08%)")
+st.markdown(
     "**Utterances:** 66  \n**Time:** 54 minutes  \n**Cost:** $6.36  \n**Overall Agreement:** 87.08%"
 )
 
-with results_col2.expander("**Results**"):
+with st.expander("**Results**"):
     extention_qs_df = pd.read_csv("data/extension_qs_agreement.csv")
     st.dataframe(extention_qs_df.set_index(extention_qs_df.columns[0]))
 
@@ -50,34 +50,24 @@ st.divider()
 
 st.header("TESOL SABR")
 
-tesol_results_col1, tesol_results_col2 = st.columns(2)
-tesol_results_col1.subheader("10% Random Sample")
-tesol_results_col1.markdown(
-    "**Utterances:** 160  \n**Time:** 2 hours  \n**Cost:** $14.34  \n**Overall Agreement:** x"
+st.subheader("10% Random Sample (92.75%)")
+st.markdown(
+    "**Utterances:** 160  \n**Time:** 2 hours  \n**Cost:** $14.34  \n**Overall Agreement:** 92.75%"
 )
 
-with tesol_results_col1.expander("**Results**"):
+with st.expander("**Results**"):
     tesol_10_df = pd.read_csv("data/tesol_10_gpt_agreement.csv")
     st.dataframe(tesol_10_df.set_index(tesol_10_df.columns[0]))
 
-tesol_results_col2.subheader("20% Random Sample")
-tesol_results_col2.markdown(
-    "**Utterances:** 321  \n**Time:** x  \n**Cost:** x  \n**Overall Agreement:** 92.75%"
-)
-
-with tesol_results_col2.expander("**Results**"):
-    st.caption("placeholder")
-    # tesol_sabr_df = pd.read_csv("")
-    # st.dataframe(tesol_sabr_df)
 
 st.divider()
 
 st.header("Official SABR")
 
+st.subheader("20% Random Sample (94.83%)")
 st.markdown(
-    "**Utterances:** 301  \n**Time:** x  \n**Cost:** x  \n**Overall Agreement:** x"
+    "**Utterances:** 60  \n**Time:** 43 minutes  \n**Cost:** $8.30  \n**Overall Agreement:** 94.83%"
 )
-
 
 with st.expander("**Results**"):
     st.caption("placeholder")
@@ -86,7 +76,8 @@ with st.expander("**Results**"):
 
 st.divider()
 
-st.subheader("Single Code - Only True")
+
+st.header("Single Code - Only True")
 code_ex_col1, code_ex_col2 = st.columns(2)
 
 code_ex_col1.markdown("#")
