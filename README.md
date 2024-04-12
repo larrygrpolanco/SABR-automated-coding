@@ -10,8 +10,3 @@ How it Works:
 
 * **Detailed Insights:** For each coded piece, the tool can provide explanations, showing you why an utterance was assigned a particular code. This feature helps in understanding the coding decisions and can be used for training or validation purposes.
 
-* **Efficient and Time-Saving:** The entire coding process is quick and automated, allowing you to focus more on analyzing the results and less on the manual work of coding data.
-
-Benefits for Teachers and Researchers:
-
-Auto-SABR-coding is ideal for those involved in educational research or teachers looking to analyze classroom language. It offers a fast, reliable way to examine how language is used in educational contexts, helping to enhance teaching strategies and better understand student interactions.
