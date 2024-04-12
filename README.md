@@ -1,6 +1,6 @@
 # SABR-automated-coding
 
-This tool is designed to streamline the process of coding educational research data, specifically focusing on the analysis of language used in classroom settings or research studies. It uses advanced language models to automatically assign specific linguistic or thematic codes to snippets of text, which can be incredibly valuable in language learning and teaching research.
+This tool is designed to streamline the process of coding educational research data, specifically focusing on the analysis of language used in classroom settings or research studies. It uses advanced language models to automatically assign specific linguistic or thematic codes to snippets of text.
 
 How it Works:
 
