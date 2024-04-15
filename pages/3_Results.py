@@ -102,7 +102,7 @@ with st.expander("Sequence/Temporal **(45.83%)**"):
     code_ex_col1, cod_ex_col2 = st.columns(2)
 
     st.markdown("**Average Agreement**")
-    st.markdown("* Inter-rater: 80% ")
+    st.markdown("* Inter-rater: 45.83% ")
     st.markdown("* Intra-rater: 86.11%")
     st.caption("\* only 12 codes")
     st.caption("ChatGPT coding example:")
