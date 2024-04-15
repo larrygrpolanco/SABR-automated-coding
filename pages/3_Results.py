@@ -70,9 +70,8 @@ st.markdown(
 )
 
 with st.expander("**Results**"):
-    st.caption("placeholder")
-    # tesol_sabr_df = pd.read_csv("")
-    # st.dataframe(tesol_sabr_df)
+    official_sabr_df = pd.read_csv("data/offical_20_agreement.csv")
+    st.dataframe(official_sabr_df.set_index(official_sabr_df.columns[0]))
 
 st.divider()
 
@@ -99,14 +98,6 @@ code_ex_col2.caption("Human Code Sample:")
 code_ex_col2.image("Assets/cog_raw_code_example.png")
 
 
-with st.expander("Cognition (78.75%)"):
-    st.markdown("**Average Agreement**")
-    st.markdown("* Inter-rater: 78.75% ")
-    st.markdown("* Intra-rater: 97.5%")
-    st.caption("ChatGPT coding example:")
-    df_cog = pd.read_csv("data/cog_20_gpt_1.csv")
-    st.dataframe(df_cog)
-
 with st.expander("Sequence/Temporal (45.83%)"):
     code_ex_col1, cod_ex_col2 = st.columns(2)
     st.markdown("**Average Agreement**")
@@ -125,6 +116,30 @@ with st.expander("Compare & Contrast (81.25%)"):
     df_seq = pd.read_csv("data/comp_20_gpt_1.csv")
     st.dataframe(df_seq)
 
+with st.expander("Cognition (78.75%)"):
+    st.markdown("**Average Agreement**")
+    st.markdown("* Inter-rater: 78.75% ")
+    st.markdown("* Intra-rater: 97.5%")
+    st.caption("ChatGPT coding example:")
+    df_cog = pd.read_csv("data/cog_20_gpt_1.csv")
+    st.dataframe(df_cog)
+
+with st.expander("Desires Preferences (83.75%)"):
+    st.markdown("**Average Agreement**")
+    st.markdown("* Inter-rater: 83.75% ")
+    st.markdown("* Intra-rater: 84.50%")
+    st.caption("ChatGPT coding example:")
+    df_desire = pd.read_csv("data/desire_20_gpt_1.csv")
+    st.dataframe(df_desire)
+
+with st.expander("Feelings Emotions (X%)"):
+    st.markdown("**Average Agreement**")
+    st.markdown("* Inter-rater: X% ")
+    st.markdown("* Intra-rater: X%")
+    st.caption("ChatGPT coding example:")
+    df_feelings = pd.read_csv("data/feelings_20_gpt_1.csv")
+    st.dataframe(df_feelings)
+
 with st.expander("Judgment & Perspective (48.75%)"):
     code_ex_col1, cod_ex_col2 = st.columns(2)
     st.markdown("**Average Agreement**")
@@ -133,5 +148,37 @@ with st.expander("Judgment & Perspective (48.75%)"):
     st.caption("ChatGPT coding example:")
     df_seq = pd.read_csv("data/judg_20_gpt_1.csv")
     st.dataframe(df_seq)
+
+with st.expander("CausalEffects ProblemSolve (X%)"):
+    st.markdown("**Average Agreement**")
+    st.markdown("* Inter-rater: X% ")
+    st.markdown("* Intra-rater: X%")
+    st.caption("ChatGPT coding example:")
+    df_causal = pd.read_csv("data/causal_20_gpt_1.csv")
+    st.dataframe(df_causal)
+
+with st.expander("Predictions Forecast (X%)"):
+    st.markdown("**Average Agreement**")
+    st.markdown("* Inter-rater: X% ")
+    st.markdown("* Intra-rater: X%")
+    st.caption("ChatGPT coding example:")
+    df_predict = pd.read_csv("data/predict_20_gpt_1.csv")
+    st.dataframe(df_predict)
+
+with st.expander("Making Connections (X%)"):
+    st.markdown("**Average Agreement**")
+    st.markdown("* Inter-rater: X% ")
+    st.markdown("* Intra-rater: X%")
+    st.caption("ChatGPT coding example:")
+    df_connect = pd.read_csv("data/connect_20_gpt_1.csv")
+    st.dataframe(df_connect)
+
+with st.expander("Background Knowledge (X%)"):
+    st.markdown("**Average Agreement**")
+    st.markdown("* Inter-rater: X% ")
+    st.markdown("* Intra-rater: X%")
+    st.caption("ChatGPT coding example:")
+    df_back = pd.read_csv("data/back_20_gpt_1.csv")
+    st.dataframe(df_back)
 
 st.divider()

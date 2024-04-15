@@ -2,7 +2,7 @@ import streamlit as st
 import pandas as pd
 import spacy
 
-# Unused fun idea, but not useful
+# Unused; fun idea, but not useful
 
 meaning_keywords_dict = {
     "wh_basic": ["who", "what", "when", "where", "which"],

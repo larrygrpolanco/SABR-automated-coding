@@ -19,7 +19,10 @@ with st.expander("Prompting Scheme"):
     )
     st.code(
         """
-        - Task: You are a qualitative research assistant coding utternaces for meaning related codes. Analyze the utterance against coding criteria. The aim of this coding is to help researchers measure and examines qualities of teacher and child talk. Use the given rules for applying codes from the coding manual, deliminate by four hashtags i.e. {delimiter}, to assess wether the utternace meets the criteria. \
+        - Task: You are a qualitative research assistant coding utternaces for meaning related codes
+        Analyze the utterance against coding criteria. 
+        The aim of this coding is to help researchers measure and examines qualities of teacher and child talk. 
+        Use the given rules for applying codes from the coding manual, deliminate by four hashtags i.e. {delimiter}, to assess wether the utternace meets the criteria. 
             
             {delimiter}
             Coding Manual: 
