@@ -88,7 +88,7 @@ code_ex_col1.markdown(
     "Intra-rater reliability is the mean agreement across every pair combination."
 )
 code_ex_col1.caption(
-    "Note: Looking at only true cases makes it easier to see the AI's reasoning and what needs to be fixed."
+    "Looking at only true cases makes it easier to see the AI's reasoning and what needs to be fixed."
 )
 code_ex_col1.caption("* Average cost: ~$0.05  \n* Average time: ~1-2 minutes")
 code_ex_col1.caption("")
@@ -98,16 +98,18 @@ code_ex_col2.caption("Human Code Sample:")
 code_ex_col2.image("Assets/cog_raw_code_example.png")
 
 
-with st.expander("Sequence/Temporal (45.83%)"):
+with st.expander("Sequence/Temporal **(45.83%)**"):
     code_ex_col1, cod_ex_col2 = st.columns(2)
+
     st.markdown("**Average Agreement**")
     st.markdown("* Inter-rater: 80% ")
     st.markdown("* Intra-rater: 86.11%")
+    st.caption("\* only 12 codes")
     st.caption("ChatGPT coding example:")
     df_seq = pd.read_csv("data/seq_12_gpt_1.csv")
     st.dataframe(df_seq)
 
-with st.expander("Compare & Contrast (81.25%)"):
+with st.expander("Compare & Contrast **(81.25%)**"):
     code_ex_col1, cod_ex_col2 = st.columns(2)
     st.markdown("**Average Agreement**")
     st.markdown("* Inter-rater: 81.25% ")
@@ -116,7 +118,7 @@ with st.expander("Compare & Contrast (81.25%)"):
     df_seq = pd.read_csv("data/comp_20_gpt_1.csv")
     st.dataframe(df_seq)
 
-with st.expander("Cognition (78.75%)"):
+with st.expander("Cognition **(78.75%)**"):
     st.markdown("**Average Agreement**")
     st.markdown("* Inter-rater: 78.75% ")
     st.markdown("* Intra-rater: 97.5%")
@@ -124,7 +126,7 @@ with st.expander("Cognition (78.75%)"):
     df_cog = pd.read_csv("data/cog_20_gpt_1.csv")
     st.dataframe(df_cog)
 
-with st.expander("Desires Preferences (83.75%)"):
+with st.expander("Desires Preferences **(83.75%)**"):
     st.markdown("**Average Agreement**")
     st.markdown("* Inter-rater: 83.75% ")
     st.markdown("* Intra-rater: 84.50%")
@@ -132,15 +134,15 @@ with st.expander("Desires Preferences (83.75%)"):
     df_desire = pd.read_csv("data/desire_20_gpt_1.csv")
     st.dataframe(df_desire)
 
-with st.expander("Feelings Emotions (X%)"):
+with st.expander("Feelings Emotions **(83.75%)**"):
     st.markdown("**Average Agreement**")
-    st.markdown("* Inter-rater: X% ")
-    st.markdown("* Intra-rater: X%")
+    st.markdown("* Inter-rater: 83.75% ")
+    st.markdown("* Intra-rater: 92.50%")
     st.caption("ChatGPT coding example:")
     df_feelings = pd.read_csv("data/feelings_20_gpt_1.csv")
     st.dataframe(df_feelings)
 
-with st.expander("Judgment & Perspective (48.75%)"):
+with st.expander("Judgment & Perspective **(48.75%)**"):
     code_ex_col1, cod_ex_col2 = st.columns(2)
     st.markdown("**Average Agreement**")
     st.markdown("* Inter-rater: 48.75%")
@@ -149,34 +151,34 @@ with st.expander("Judgment & Perspective (48.75%)"):
     df_seq = pd.read_csv("data/judg_20_gpt_1.csv")
     st.dataframe(df_seq)
 
-with st.expander("CausalEffects ProblemSolve (X%)"):
+with st.expander("Causal Effects Problem Solve **(90%)**"):
     st.markdown("**Average Agreement**")
-    st.markdown("* Inter-rater: X% ")
-    st.markdown("* Intra-rater: X%")
+    st.markdown("* Inter-rater: 90% ")
+    st.markdown("* Intra-rater: 90%")
     st.caption("ChatGPT coding example:")
     df_causal = pd.read_csv("data/causal_20_gpt_1.csv")
     st.dataframe(df_causal)
 
-with st.expander("Predictions Forecast (X%)"):
+with st.expander("Predictions Forecast **(36.25%)**"):
     st.markdown("**Average Agreement**")
-    st.markdown("* Inter-rater: X% ")
-    st.markdown("* Intra-rater: X%")
+    st.markdown("* Inter-rater: 36.25% ")
+    st.markdown("* Intra-rater: 92.50%")
     st.caption("ChatGPT coding example:")
     df_predict = pd.read_csv("data/predict_20_gpt_1.csv")
     st.dataframe(df_predict)
 
-with st.expander("Making Connections (X%)"):
+with st.expander("Making Connections **(26.25%)**"):
     st.markdown("**Average Agreement**")
-    st.markdown("* Inter-rater: X% ")
-    st.markdown("* Intra-rater: X%")
+    st.markdown("* Inter-rater: 26.25% ")
+    st.markdown("* Intra-rater: 89.17%")
     st.caption("ChatGPT coding example:")
     df_connect = pd.read_csv("data/connect_20_gpt_1.csv")
     st.dataframe(df_connect)
 
-with st.expander("Background Knowledge (X%)"):
+with st.expander("Background Knowledge **(27.50%)**"):
     st.markdown("**Average Agreement**")
-    st.markdown("* Inter-rater: X% ")
-    st.markdown("* Intra-rater: X%")
+    st.markdown("* Inter-rater: 27.50% ")
+    st.markdown("* Intra-rater: 86.67%")
     st.caption("ChatGPT coding example:")
     df_back = pd.read_csv("data/back_20_gpt_1.csv")
     st.dataframe(df_back)
