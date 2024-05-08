@@ -142,6 +142,10 @@ if uploaded_file is not None:
         start_time = time.time()
         with st.spinner("Coding in progress... Please wait."):
             for i, row in df.iterrows():
+                # Skip coding for rows marked '1' in the 'Exclude' column
+                if row.get("Exclude") == "1":
+                    continue
+
                 utterance = row["Utterance/Idea Units"]
 
                 if "Sequence/Temporal" in selected_codes:
